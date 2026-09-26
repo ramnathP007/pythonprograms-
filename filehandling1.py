@@ -5,7 +5,7 @@ file = open('ramnath.txt','r')
 #line = file.readline() Read the first line
 lines = file.readlines()
 print (lines)
-
+file.close()
 
 # write a file
 
