@@ -1,0 +1,302 @@
+File Handling
+-------------
+
+Initial file
+--------------
+
+Hi team
+
+I am a devops engineer working with many tools to automate daily tasks
+
+------------------------------------------------------------------------------------------------------------------------------
+
+to use the file first we need to make the file ready for reading for that we need to use the below cmd
+
+file = open ('filename','filemode')
+eg:
+
+// mode reading
+file = open('testfile.txt','r') #makes the file ready for ready or we can say this tells this file can be readable only
+content = file.read()  # accessing the file and reading it actually
+print (content) #printing the contents in the file
+file.close() # opened file should be closed 
+
+Output:
+
+Hi team
+
+I am a devops engineer working with many tools to automate daily tasks
+
+file = open('testfile.txt','r') #makes the file ready for ready or we can say this tells this file can be readable only
+line = file.readline() # reads the first line
+lines = file.readlines() # reads the entire file line by line and push to list
+print (line) #printing the contents in the file
+file.close() # opened file should be closed
+
+Output:
+
+First line is empty and so first line blank
+
+file = open('testfile.txt','r') #makes the file ready for ready or we can say this tells this file can be readable only
+lines = file.readlines() # reads the entire file line by line and push to list
+print (lines) #printing the contents in the file
+file.close() # opened file should be closed
+
+Output:
+
+['Hi team\n', '\n', 'I am a devops engineer working with many tools to automate daily tasks\n']
+
+// mode writing
+file = open('testfile.txt','r') #makes the file ready for ready or we can say this tells this file can be readable only
+file = open('testfile.txt','w')
+file.write("I am working in Zohocorporation\n") # this will overwrite the entire file
+print (content)
+file.close() # opened file should be closed 
+
+// mode append
+file = open('testfile.txt','a')
+file.write("I live in Madurai\n") # this will add the content next to the file and it will not overwrite    
+content = file.read()
+print (content)
+file.close() # opened file should be closed 
+r	- Read	              - Opens an existing file for reading (default)
+w	- Write	              - Creates a file or overwrites existing content
+a	- Append	          - Adds content to the end of a file
+x	- Exclusive creation  -	Creates a new file; fails if it already exists
+r+	- Read + Write	      - Reads and writes without automatically deleting existing content
+w+	- Write + Read	      - Reads and writes; truncates existing content
+a+	- Append + Read	      - Appends and reads; creates the file if missing
+x+	- Create + Read/Write - Creates a new file for reading and writing
+rb	- Read Binary	      - Reads binary files
+wb	- Write Binary	      - Writes binary data; overwrites existing content
+ab	- Append Binary	      - Appends binary data
+rb+	- Read/Write Binary	  - Reads and writes an existing binary file
+wb+	- Write/Read Binary	  - Creates or truncates a binary file for reading and writing
+ab+	- Append/Read Binary  - Appends and reads binary data
+t	- Text	              - Text mode (default); combined with another mode such as rt
+
+------------------------------------------------------------------------------------------------------------------------------
+OS packages
+-----------
+
+
+# to create and list the dir
+import os
+os.mkdir('/home/ramnath-23013/Documents/python_devops/testfolder') #To create the a directory using os package
+a = os.listdir('/home/ramnath-23013/Documents/python_devops/') # used to list the directory and here . means current directory
+print (a)
+
+
+# to check whether a file is present or not
+import os
+import os.path
+
+a = os.path.exists('/home/ramnath-23013/Documents/python_devops/testfolder') #this is used to know whether a particular path is present or not
+if (a == True):
+    print ('The mentioned file is present')
+else:
+    print ('The mentioned file is not present')
+    os.mkdir('/home/ramnath-23013/Documents/python_devops/testfolder')
+    print ('The mentioned file is created in the mentioned path')
+
+
+# to check remove a directory is present or not
+import os
+import os.path
+
+a = os.path.exists('/home/ramnath-23013/Documents/python_devops/testfolder') #this is used to know whether a particular path is present or not
+if (a == True):
+    print ('The mentioned file is present')
+    os.rmdir('/home/ramnath-23013/Documents/python_devops/testfolder')
+    print ('The mentioned file is deleted in the mentioned path')
+
+else:
+    print ('The mentioned file is not present')
+    os.mkdir('/home/ramnath-23013/Documents/python_devops/testfolder')
+    print ('The mentioned file is created in the mentioned path')
+
+
+# To remove  a file
+
+os.remove('filename)
+
+
+#To remove a directory recursively
+
+import os
+import os.path
+import shutil # to use for removing the directory recursively
+
+a = os.listdir ('/home/ramnath-23013/Documents/python_devops')
+print (a)
+
+shutil.rmtree ('/home/ramnath-23013/Documents/python_devops/testfolder')
+
+print (a)
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Control Statement
+------------------
+
+If and Else 
+-----------
+a = int(input ("Enter the age:"))
+
+if a >= 18:
+    print("User is an adult")
+else:
+    print("User is not a adult")
+
+If and Elif
+-----------
+
+a = int(input ("Enter the Score:"))
+
+if a >= 90:
+    print("Grade is A")
+elif a >= 80:
+    print("Grade is B")
+elif a >=70:
+    print("Grade is C")
+else:
+    print("Grade is F")
+
+Nested If
+-----------
+a = 10
+b = 5
+
+if a > b:
+    print("a is greater than b")
+    if a > 15:
+        print("a is also greater than 15")
+    else:
+        print("a is not greater than 15")
+else:
+    print("x is not greater than b")
+
+Loops
+------
+for
+---
+fruits = ['apple', 'banana', 'cherry']
+
+for i in fruits:
+    print(i)
+
+while
+-----
+count = 0
+
+while count < 5:
+    print(count)
+    count += 1
+
+break and continue
+
+for i in range (10):
+    if i == 5:
+        break
+    print (i)
+
+for i in range (10):
+    if i == 5:
+        continue
+    print (i)
+
+Looping through Dictionaries
+-----------------------------
+
+person = {'name':'john', 'age':30, 'city': 'madurai'}
+
+for key,value in person.items():
+    print (f'{key}:{value}')  # f is used to pass or invalid the key and value inside a string ie ''
+
+Loop Control with else
+# used else where a loop executed without a break
+
+for i in range(5):
+    print(i)
+else:
+    print("Loop completed without a break")
+
+Incorrect syntax
+
+for i in range(5):
+    if i ==3:
+        break
+    print(i)
+else:
+    print("Loop completed without a break")
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Functions and Modules
+---------------------
+
+
+Functions
+---------
+
+
+Simple Program
+---------------
+def greet(name):
+    print(f'Hello,{name}!!!')
+
+
+greet("Ramnath")
+
+
+def sum(a,b):
+    print(a+b)
+
+sum(10,5)
+
+def sum(a,b):
+    return a+b 
+
+print(sum(10,5))
+
+def sum(a,b):
+    c = a+b
+    print (c)
+
+sum(10,5)
+
+def sum(a,b):
+    c = a+b
+    return c
+
+d = sum(10,5)
+print (d)
+
+
+Modules
+-------
+
+Module Function 
+def add(a,b):
+    return a+b
+
+def sub(a,b):
+    return a-b
+
+def multiply(a,b):
+    return a*b
+
+def div(a,b):
+    if a!=0:
+        return a/b
+    else:
+        return "Error: Division by Zero is not possible"
+
+File using Module
+
+import pratice1
+
+a= pratice1.add (10,4)
+print (a)
+
+print (pratice1.sub(10,4))
