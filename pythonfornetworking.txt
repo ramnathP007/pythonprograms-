@@ -1,0 +1,167 @@
+IP Address
+----------
+
+* It is called Internet Protocol
+* It is used to identify a device or we can say it is used to locate a device
+
+IP Address Types
+
+IPV4
+192.168.1.2
+It contains four octets each of 8 bits and in total 32 bits
+Limited as it may be exhausted
+
+IPV6
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+It is a 128 bits Address introduced for exhaustion of IPV4 Address
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Subnets
+--------
+
+* It is a logical subdivision of an IP network (Division of large Ip Address range into smaller manageable segments)
+
+Components
+Subnet mask
+*used to identify the network and host part in a IP
+192.168.1.100/24
+Inital 24 is fixed and it is for network portion
+Remaining is for host
+
+so the Subnet mask is 255.255.255.0 or 11111111.11111111.11111111.0
+
+Subnet ID
+So the Subnet Id is the part of IP Address that represents the network within the Subnet
+192.168.1.0
+
+
+range of the host we can get is 
+192.168.1.1 to 192.168.1.254
+
+that is n= 32-24 is 8 then 2^n ie 256
+host will be host = 2^n - 2
+ie 256 -2 = 254
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Ports
+-----
+
+* Ports in basic it is a door to access the application
+* Port range is 0 - 65535
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Protocol
+--------
+
+Set of rules
+
+TCP/IP
+
+Transmission Control Protocol / Internet Protocol --> used by major applications
+    --> Inside this we have several Protocols
+        ==> HTTP,SMTP,FTP
+    --> It is reliable Protocol which will have both syn and ack 
+
+UDP
+
+User Datagram Protocol
+
+    --> Same like TCP but this is not reliable --> only syn and it will not have ack
+
+
+HTTP (Hypertext transfer Protocol)--> Used for transfering web application without security and this uses TCP Protocol. This is used where is no SSL/TSL is used
+
+HTTPS (Hypertext transfer Protocol Secure) -->Used for transfering web application with security and this uses TCP Protocol. This is used where is SSL/TSL is used
+
+DNS
+
+Changes the domain name into IP and viseversa
+
+Firewall and Routers
+
+Firewall controls the ingress and egress traffic
+
+Routers are device which is used to transfer the traffic from one network to other network
+
+--------------------------------------------------------------------------------------------------------------------------------
+packages for networks
+----------------------
+
+1) Socket
+2) Request
+3) Scapy
+
+import scapy.all import IP, ICMP, srl
+
+#Define the target IP Address
+target_ip = "www.google.com"
+
+#craft an ICMP packet (ping request)
+packet = IP(dst=target_ip) / ICMP()
+
+#Send a packet and receive a response
+response = srl(packet, timeout=2, verbose=False)
+
+#Check if a response was received
+if response:
+    print(f"Received response from {response.src}")
+else:
+    print("No response received")
+------------------------------------------------------------------------------------
+
+Socket Library
+---------------
+Socket is an endpoint which is used to create/open and close a connection which helps of to send and receive datas
+
+Socket Types
+-------------
+
+Stream Sockets
+
+--> Reliable and make a proper communication channel 
+--> It uses TCP Protocol
+--> It makes sure the data send is received to the endpoint
+--> syntax -- socket.SOCK_STREAM
+
+Datagram Sockets
+
+--> This is a connection less unreliable communication channel
+--> It uses UDP Protocol
+--> It does not assure us the data is sent to the receiver endpoint
+--> syntax -- socket.SOCK_DGRAM
+
+Address Family
+--------------
+
+IPV4 --> syntax -- socket.AF_INET
+IPV6 --> syntax -- socket.AF_INET6
+
+
+Creating a Socket
+------------------
+we need two py script 
+1) server.py
+2) client.py
+
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # we are creating socket object socket.socket(Address_Family,Socket type)here the Sock stream we are using for reliable connection
+
+server_address = ('localhost', 12345) # port can be opened from and two --> 0 - 65535
+
+server_socket.bind(server_address) # here is the step where we bind the server socket with the server address
+
+server_socket.listen(5) # here we are making the port to listen in queue with giving the size of the queue
+
+client_socket, client_address = server_socket.accept()
+
+client_socket.connect(server_address)
+
+message = "Hello, User"
+
+client_socket.send(message.encode('utf-8'))
+
+data = client_socket.recv(1024).decode('utf-8')
